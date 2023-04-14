@@ -1,0 +1,16 @@
+{
+  "name": "elitmusgame",
+  "version": "0.0.1",
+  "description": "A Web Game to Assest People's Soft Skill.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "crysosancher",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}
