@@ -111,6 +111,7 @@ authRouter.post('/login', function (req, res,next) {
 		.then((result) => {
 			if(result){
 				req.session.loggedIn=true
+				req.session.email=req.body.email
 				res.send("Login Successful").status(200)
 			}else{
 				res.send("Login Failed").status(401)
@@ -144,6 +145,7 @@ authRouter.post('/signup',function(req,res,next){
 	}
 })
 authRouter.get('/logout', function (req, res,next) {
+	console.log(req.session)
 	req.session.destroy()
 	res.send("Logout Successful").status(200)
 })
