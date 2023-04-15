@@ -1,9 +1,11 @@
 const {Router} = require('express')
+const sessionMiddleware = require('./middleware');
+
 // Require the MongoDB Node.js driver
 
 const { values } = require('../utility/constant')
 const authRouter = Router();
-
+authRouter.use(sessionMiddleware);
 // Replace the following with your MongoDB Atlas connection string
 // const uri = values.url;
 // Initialize a new MongoClient instance
@@ -15,6 +17,14 @@ const uri =
   "mongodb+srv://naveen:I4tIQp55gZ1OptOl@cluster0.kuyrg.mongodb.net/?retryWrites=true&w=majority";
 
 // Initialize a new MongoClient instance
+const client = new MongoClient(uri, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
+console.log("connected")
+	
+
+
 
 
 
@@ -22,29 +32,26 @@ const uri =
 // const dbName = values.dbName;
 const collectionName = 'auth';
 async function login(email, password) {
-  const client = new MongoClient(uri, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	});
+ 
 
   try {
     await client.connect();
-		console.log("Connected correctly to Mongodb");
+	 	console.log("Connected correctly to Mongodb");
 
-    const db = client.db("elitmus");
+  //   const db = client.db("elitmus");
 
-    const collection = db.collection(collectionName);
-		console.log("hiiiiii")
-		//console.log(collection)
-	console.log(email)
+  //   const collection = db.collection(collectionName);
+	// 	console.log("hiiiiii")
+	// 	//console.log(collection)
+	// console.log(email)
 
-    const user = await collection.findOne();
+    // const user = await collection.findOne();
 		//console.log(user)
-		const result = await client
+		const user = await client
     .db("elitmus")
     .collection("auth")
     .findOne({ email: email })
-		console.log(result)
+		console.log(user)
 
     if (!user) {
       console.log('User not found');
@@ -64,8 +71,38 @@ async function login(email, password) {
     await client.close();
   }
 }
+async function signup(email,password){
+	try {
+    await client.connect();
+	 	console.log("Connected correctly to Mongodb");
+		const user = await client
+    .db("elitmus")
+    .collection("auth")
+    .findOne({ email: email })
+		console.log(user)
 
-authRouter.post('/', function (req, res,next) {
+    if (!user) {
+			//will add one
+      console.log('User not found');
+			//insert a new user
+
+			const result = await client.db("elitmus").collection("auth").insertOne({
+				email: email,
+				password: password
+			})
+      return true;
+    }else{
+			console.log('User already exists');
+			return false
+		}
+  } catch (err) {
+    console.log(err);
+  } finally {
+    await client.close();
+  }
+}
+
+authRouter.post('/login', function (req, res,next) {
 	console.log(req.body)
 
 	//res.send('Welcome to game route')
@@ -73,6 +110,7 @@ authRouter.post('/', function (req, res,next) {
 		login(req.body.email, req.body.pswd)
 		.then((result) => {
 			if(result){
+				req.session.loggedIn=true
 				res.send("Login Successful").status(200)
 			}else{
 				res.send("Login Failed").status(401)
@@ -86,5 +124,27 @@ authRouter.post('/', function (req, res,next) {
 	else{
 		res.send("Login Failed").status(401)
 	}
+})
+authRouter.post('/signup',function(req,res,next){
+	console.log(req.body)
+	if(req.body.email && req.body.pswd){
+		signup(req.body.email, req.body.pswd)
+		.then((result) => {
+			console.log("result=",result)
+			if(result){
+				res.send("Signup Successful").status(200)
+			}else{
+				res.send("User already exist,kindly login").status(401)
+			}
+		})
+		.catch((err) => {
+			console.log(err)
+			res.send("Signup Failed").status(401)
+		})
+	}
+})
+authRouter.get('/logout', function (req, res,next) {
+	req.session.destroy()
+	res.send("Logout Successful").status(200)
 })
 module.exports = authRouter
