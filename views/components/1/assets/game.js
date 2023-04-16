@@ -124,7 +124,7 @@ const flipCard = card => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    score: state.totalFlips,
+                    score: 200-state.totalFlips,
                     time: state.totalTime
                 })
             })

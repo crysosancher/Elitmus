@@ -28,7 +28,11 @@ async function insert1(email, score, time) {
       await client
         .db("elitmus")
         .collection("stats")
-        .insertOne({ email: email, score: [score], time: [time] })
+        .insertOne({
+          email: email,
+          score: { game1: [score] },
+          time: { game1: [time] },
+        })
         .then(() => {
           console.log("inserted");
         });
@@ -38,7 +42,15 @@ async function insert1(email, score, time) {
       await client
         .db("elitmus")
         .collection("stats")
-        .updateOne({ email: email }, { $push: { score: [score], time: [time] } })
+        .updateOne(
+          { email: email },
+          {
+            $push: {
+              [`score.game1`]: score,
+              [`time.game1`]: time,
+            },
+          }
+        )
         .then(() => {
           console.log("inserted");
         });
