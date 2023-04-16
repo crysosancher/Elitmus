@@ -112,7 +112,8 @@ authRouter.post('/login', function (req, res,next) {
 			if(result){
 				req.session.loggedIn=true
 				req.session.email=req.body.email
-				res.send("Login Successful").status(200)
+				let user=req.session.email.split("@")
+				res.render("components/start/index" ,{tittle: "Elitmus Puzzle Game",email:user[0]})
 			}else{
 				res.send("Login Failed").status(401)
 			}

@@ -5,7 +5,7 @@ const gameRouter = Router();
 gameRouter.use(sessionMiddleware);
 gameRouter.get('/1',function(req,res,next){
 	if(req.session.loggedIn){
-	res.render("components/1/index")}
+	res.render("components/1/index",{tittle: "Elitmus Puzzle Game",email:req.session.email})}
 	else{
 		res.redirect('/')
 	}
@@ -14,7 +14,7 @@ gameRouter.get('/1',function(req,res,next){
 //@starting page after login
 gameRouter.get('/start', function (req, res,next) {
 	if(req.session.loggedIn){
-	res.send('Welcome to game start route')}
+	res.send('Welcome to game start route',)}
 	else{
 		res.redirect('/')
 	}
