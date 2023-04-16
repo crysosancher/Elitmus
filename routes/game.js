@@ -11,6 +11,13 @@ gameRouter.get('/1',function(req,res,next){
 	}
 
 })
+gameRouter.get('/2',function(req,res,next){
+if(req.session.loggedIn){
+	res.render("components/2/index",{tittle: "Elitmus Puzzle Game",email:req.session.email})
+}else{
+	res.redirect('/')
+}
+})
 //@starting page after login
 gameRouter.get('/start', function (req, res,next) {
 	if(req.session.loggedIn){

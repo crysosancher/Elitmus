@@ -134,6 +134,7 @@ const flipCard = card => {
                     You won!<br />
                     with <span class="highlight">${state.totalFlips}</span> moves<br />
                     under <span class="highlight">${state.totalTime}</span> seconds
+                    <a href="/2" class="next-btn">Next</a>
                 </span>
             `
 

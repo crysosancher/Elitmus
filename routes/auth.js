@@ -101,7 +101,9 @@ async function signup(email,password){
     await client.close();
   }
 }
-
+authRouter.get('/admin',function(req,res,next){
+res.render("components/admin/index" ,{tittle: "Elitmus Admin"})
+})
 authRouter.post('/login', function (req, res,next) {
 	console.log(req.body)
 

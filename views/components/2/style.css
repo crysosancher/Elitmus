@@ -75,66 +75,48 @@ body{
 	margin:0.5rem 0 ;
 }
 
-.btn-start{
-	display:flex;
+.question {
+	background:rgba(0, 41, 128, 0.342);
+	border: 1px solid #fff;
+	padding: 2.5rem 3rem;
+	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: white;
-	text-decoration: none;
-	background: linear-gradient(45deg, #000, #3636f51a);	
+	flex-direction: column;
+	border-radius: 30% 50% 10% / 10% 20% 34%;
+}
+
+
+.question p{
+	color: #fff;
+	font-size: 2.5rem
+}
+
+.question input{
 	border: 1px solid #fff;
-	border-radius: 30% 20% / 10% 40%;
-	width:200px;
-	height:100px;
-	font-size:25px;
-	letter-spacing:3px;
+	padding: 1rem 0.5rem;
+	font-size: 1.125rem;
+	color: #fff;
+	border-radius: 10px;
+	margin: 1rem 0;
+	background: transparent;
 }
 
-.btn-start:hover{
-	background: linear-gradient(45deg, #fff, #3636f51a);
-	text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 40px #000, 0 0 80px #000, 0 0 160px #000;	
+.btn {
+	text-align: center;
+	width: 150px;
+	font-size: 1.125rem;
+	box-sizing: border-box;
+	letter-spacing: 2px;
+	margin-top: 1.5rem;
+	border: 1px solid black;
+	border-radius: 10% 20% / 30% 40%;
+	padding: 1rem 2rem;
 }
 
-.play-icon{
-	width:50px;
-	height:50px;
-	margin-left:10px;
-}
-.animation,.animation-right{
-  /* background-color: white; */
-	font-size:25px;
-	color:white;
-  height: 20px;
-  width: 20px;
-	padding:2px;
-  position: absolute;
-}
-
-.animation{
-  left: 100px;
-  animation: fall 2.5s linear infinite;
-
-}
-.animation-right{
-  animation: tall 2.5s linear infinite;
-	right:200px;
-}
-
-@keyframes tall {
-  from {
-   top:100%;
-	 /* left:0; */
-  }
-  to {
-    top: 0;
-  }
-}
-@keyframes fall {
-  from {
-   top:0;
-	 /* left:0; */
-  }
-  to {
-    top: 100%;
-  }
+.btn:hover{
+	background: #fff;
+	color: #000;
+	transition: 0.3s ease-in-out;  
+	cursor: pointer;
 }
