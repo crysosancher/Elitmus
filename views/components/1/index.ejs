@@ -10,6 +10,11 @@
         <script src="components/1/assets/game.js" defer></script>
     </head>
     <body>
+        <div class="top"></div>
+        <section class="username">
+			<div><%=email %></div>
+			<a href="/auth/logout">Logout</a>
+		</section>
         <div class="game">
             <div class="controls">
                 <button>Start</button>
@@ -21,7 +26,10 @@
             <div class="board-container">
                 <div class="board" data-dimension="4"></div>
                 <div class="win">You won!</div>
+                <a href="">Next </a>
             </div>
         </div>
+
+	<div class="bottom"></div>
     </body>
 </html>

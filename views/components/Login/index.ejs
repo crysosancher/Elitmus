@@ -23,7 +23,7 @@
 			</div>
 
 			<div class="login">
-				<form action="/auth/login"method="POST" >
+				<form action="/auth/login" method="post" id="login-form" >
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email" name="email" placeholder="Email" required="">
 					<input type="password" name="pswd" placeholder="Password" required="">
@@ -55,5 +55,26 @@
 	
 		.catch (err => alert('some error occured'))
 	})
+	const form2 = document.forms['login-form'];
+	// form2.addEventListener('submit', event => {
+	// 	event.preventDefault();
+	// 	const formData2 = new FormData(form2);
+	// 	const data2 = Object.fromEntries(formData2);
+	// 	// console.log(data);
+
+	// 	fetch('/auth/signup', {
+	// 		method: 'POST',
+	// 		body: JSON.stringify(data2),
+	// 		headers: {
+	// 			'Content-Type': 'application/json'
+	// 		}
+	// 	})
+	// 	.then( ({status})=> {
+	// 		console.log(`this is isndie then of login page`)
+	// 		status===200?window.open('/'):alert('Some unknown error occured')
+	// 	})
+	
+	// .catch (err => {console.log('this is sindide cATCH}'); alert('some error occured')})
+	// })
 </script>
 </html>

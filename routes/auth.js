@@ -115,12 +115,12 @@ authRouter.post('/login', function (req, res,next) {
 				let user=req.session.email.split("@")
 				res.render("components/start/index" ,{tittle: "Elitmus Puzzle Game",email:user[0]})
 			}else{
-				res.send("Login Failed").status(401)
+				res.render("components/Error/error")
 			}
 		})
 		.catch((err) => {
 			console.log(err)
-			res.send("Login Failed").status(401)
+			res.render("components/Error/error")
 		})
 	}
 	else{
@@ -150,6 +150,6 @@ authRouter.post('/signup',function(req,res,next){
 authRouter.get('/logout', function (req, res,next) {
 	console.log(req.session)
 	req.session.destroy()
-	res.send("Logout Successful").status(200)
+	res.redirect('/')
 })
 module.exports = authRouter
