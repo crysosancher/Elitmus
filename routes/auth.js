@@ -101,6 +101,7 @@ async function signup(email,password){
     await client.close();
   }
 }
+
 authRouter.get('/admin',function(req,res,next){
 res.render("components/admin/index" ,{tittle: "Elitmus Admin"})
 })
@@ -117,16 +118,16 @@ authRouter.post('/login', function (req, res,next) {
 				let user=req.session.email.split("@")
 				res.render("components/start/index" ,{tittle: "Elitmus Puzzle Game",email:user[0]})
 			}else{
-				res.render("components/Error/error")
+				res.render("components/Error/error",{tittle:"Wrong Credentials"})
 			}
 		})
 		.catch((err) => {
 			console.log(err)
-			res.render("components/Error/error")
+			res.render("components/Error/error",{tittle:"Internal Server Error"})
 		})
 	}
 	else{
-		res.send("Login Failed").status(401)
+		res.render("components/Error/error",{tittle:"Internal Server Error"})
 	}
 })
 authRouter.post('/signup',function(req,res,next){

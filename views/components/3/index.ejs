@@ -16,7 +16,7 @@
 			<a href="/auth/logout">Logout</a>
 		</section>
 		<div class="question">
-			<p>How emotes where their in Game 1? </p>
+			<p>I'm the number which have not seen your grade card yet? </p>
 			<input type="text" name="name" autocomplete="off" id="name">
 			<button class="btn">Submit</button>
 		</div>
@@ -24,14 +24,24 @@
 		<div class="bottom"></div>
 </body>
 <script>
+	let c=0;
 	document.querySelector('.btn').addEventListener('click',function(){
+		
 		var name = document.querySelector('#name').value;
-		if(name == "5"){
-			window.location.href = "/3";
+		if(name == "101"){
+			window.location.href = "/final";
 		}
 		else{
-			alert("Wrong answer");
+			if(c==0){
+				c++;
+				alert("Wrong answer");
+			}else if(c==1){
+				c++;
+				alert("Hint:Spend some time on each page");
+				c=0;
 			window.location.href = "/";
+			}
+			
 		}
 	})
 </script>

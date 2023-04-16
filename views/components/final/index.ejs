@@ -16,23 +16,10 @@
 			<a href="/auth/logout">Logout</a>
 		</section>
 		<div class="question">
-			<p>How emotes where their in Game 1? </p>
-			<input type="text" name="name" autocomplete="off" id="name">
-			<button class="btn">Submit</button>
+			<p>Congrats ,You have won</p>
 		</div>
 		
 		<div class="bottom"></div>
 </body>
-<script>
-	document.querySelector('.btn').addEventListener('click',function(){
-		var name = document.querySelector('#name').value;
-		if(name == "5"){
-			window.location.href = "/3";
-		}
-		else{
-			alert("Wrong answer");
-			window.location.href = "/";
-		}
-	})
-</script>
+
 </html>

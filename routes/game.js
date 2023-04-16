@@ -3,9 +3,23 @@ const {Router} = require('express')
 const sessionMiddleware = require('./middleware');
 const gameRouter = Router();
 gameRouter.use(sessionMiddleware);
+gameRouter.get('/final',function(req,res,next){
+	if(req.session.loggedIn){
+	res.render("components/final/index" ,{tittle: "Elitmus Puzzle Game",email:req.session.email})
+	}else{
+		res.redirect('/')
+	}
+})
+gameRouter.get('/3',function(req,res,next){
+	if(req.session.loggedIn){
+	res.render("components/3/index",{tittle: "Elitmus Puzzle Game 3",email:req.session.email})}
+	else{
+		res.redirect('/')
+	}
+})
 gameRouter.get('/1',function(req,res,next){
 	if(req.session.loggedIn){
-	res.render("components/1/index",{tittle: "Elitmus Puzzle Game",email:req.session.email})}
+	res.render("components/1/index",{tittle: "Elitmus Puzzle Game 1",email:req.session.email})}
 	else{
 		res.redirect('/')
 	}
@@ -13,7 +27,7 @@ gameRouter.get('/1',function(req,res,next){
 })
 gameRouter.get('/2',function(req,res,next){
 if(req.session.loggedIn){
-	res.render("components/2/index",{tittle: "Elitmus Puzzle Game",email:req.session.email})
+	res.render("components/2/index",{tittle: "Elitmus Puzzle Game 2",email:req.session.email})
 }else{
 	res.redirect('/')
 }
