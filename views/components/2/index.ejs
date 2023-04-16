@@ -24,9 +24,18 @@
 		<div class="bottom"></div>
 </body>
 <script>
-	document.querySelector('.btn').addEventListener('click',function(){
+	document.querySelector('.btn').addEventListener('click',async function(){
 		var name = document.querySelector('#name').value;
 		if(name == "5"){
+			await fetch('/insert/2',{
+				method:'POST',
+				headers:{
+					'Content-Type':'application/json'
+				},
+				body:JSON.stringify({
+					score:100
+				})
+			})
 			window.location.href = "/3";
 		}
 		else{

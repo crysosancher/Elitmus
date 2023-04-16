@@ -29,6 +29,15 @@
 		
 		var name = document.querySelector('#name').value;
 		if(name == "101"){
+			fetch('/insert/3',{
+				method:'POST',
+				headers:{
+					'Content-Type':'application/json'
+				},
+				body:JSON.stringify({
+					score:200
+				})
+			})
 			window.location.href = "/final";
 		}
 		else{
