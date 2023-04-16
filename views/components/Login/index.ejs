@@ -13,7 +13,7 @@
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-				<form action="/auth/signup"method="POST">
+				<form  id="signup-form">
 					<label for="chk" aria-hidden="true">Sign up</label>
 					<!-- <input type="text" name="txt" placeholder="User name" required=""> -->
 					<input type="email" name="email" placeholder="Email" required="">
@@ -23,7 +23,7 @@
 			</div>
 
 			<div class="login">
-				<form action="/auth/login"method="POST">
+				<form action="/auth/login"method="POST" >
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email" name="email" placeholder="Email" required="">
 					<input type="password" name="pswd" placeholder="Password" required="">
@@ -34,4 +34,26 @@
 	</div>
 	<div class="bottom"></div>
 </body>
+<script>
+	const form1 = document.forms['signup-form'];
+	form1.addEventListener('submit', event => {
+		event.preventDefault();
+		const formData = new FormData(form1);
+		const data = Object.fromEntries(formData);
+		// console.log(data);
+
+		fetch('/auth/signup', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		.then( ({status})=> {
+			status===200?alert('SignUp Successful,Please login now '):status===401?alert('Error: User already existed'):status===401?alert('Some unknown error occured'):alert('Some unknown error occured')
+		})
+	
+		.catch (err => alert('some error occured'))
+	})
+</script>
 </html>

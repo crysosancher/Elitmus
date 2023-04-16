@@ -134,14 +134,16 @@ authRouter.post('/signup',function(req,res,next){
 		.then((result) => {
 			console.log("result=",result)
 			if(result){
-				res.send("Signup Successful").status(200)
+				console.log("Inside if")
+				res.status(200).send("Signup Successful")
 			}else{
-				res.send("User already exist,kindly login").status(401)
+				console.log("Inside else")
+				res.status(401).send("Signup Failed")
 			}
 		})
 		.catch((err) => {
 			console.log(err)
-			res.send("Signup Failed").status(401)
+			res.status(400).send("Signup Failed in another way")
 		})
 	}
 })
