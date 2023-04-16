@@ -116,7 +116,18 @@ const flipCard = card => {
 
     // If there are no more cards that we can flip, we won the game
     if (!document.querySelectorAll('.card:not(.flipped)').length) {
-        setTimeout(() => {
+        setTimeout(async () => {
+            console.log('You won!',state)
+            await fetch('/insert/1',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    score: state.totalFlips,
+                    time: state.totalTime
+                })
+            })
             selectors.boardContainer.classList.add('flipped')
             selectors.win.innerHTML = `
                 <span class="win-text">
@@ -133,12 +144,16 @@ const flipCard = card => {
 
 const attachEventListeners = () => {
     document.addEventListener('click', event => {
+        console.log(state)
         const eventTarget = event.target
         const eventParent = eventTarget.parentElement
 
         if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {
+            
+
             flipCard(eventParent)
         } else if (eventTarget.nodeName === 'BUTTON' && !eventTarget.className.includes('disabled')) {
+            
             startGame()
         }
     })
