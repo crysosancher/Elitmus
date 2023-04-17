@@ -18,6 +18,7 @@
 
 ### ii)Question-Answer based on Prvious screens:-
 * Attention to detail: Players must pay close attention to the cards and their position in order to make matches, which helps to develop an eye for detail and the ability to focus on important information.And This important information are being further used in the game.
+* Even the start page has so many clues which could be used in the final stage of the game to answer the question.
 
  # All the possible ways to solve the puzzle and the dead-ends:-
 * First game has to be solved with least moves and least time to maintain the good score.
