@@ -47,7 +47,8 @@ node index.js
 - [x] Session management.
 - [x] 5+ clues as each stage answer depends on previous stages.
 - [x] 2 dead-ends
-- [x] 1 solution 
+- [x] 1 solution  
+  ![Alt text](https://github.com/crysosancher/Elitmus/blob/master/utility/mogo.png)
 - [x] Time,score and process for each user are being stored in mongodb.
 - [x] On refreshing, from either browser or website, the puzzle should start from the same stage by maintaining a session manager.
 - [x] A light Dashboard with users top score and hits,could have been more detailed if the given time frame was around a week.
