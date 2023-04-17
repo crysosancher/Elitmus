@@ -26,3 +26,43 @@
 ## Deadlock:-   
 * 1 Wrong answer in 2nd stage could make the player out of the game by logging him out.    
 * 2 Wrong answer with a warning and a Hint could make the player out of the game.
+
+# Steps to setup up the project
+``` javascript 
+npm install
+```
+
+
+``` javascript
+npm start
+```
+or
+``` javascript
+node index.js 
+```
+## Features:-  
+- [x] Anyone with an email address can create an Id and password to participate in the game
+- [x] Proper authentication on each route.
+- [x] Session management.
+- [x] 5+ clues as each stage answer depends on previous stages.
+- [x] 2 dead-ends
+- [x] 1 solution 
+- [x] Time,score and process for each user are being stored in mongodb.
+- [x] On refreshing, from either browser or website, the puzzle should start from the same stage by maintaining a session manager.
+- [x] A light Dashboard with users top score and hits,could have been more detailed if the given time frame was around a week.
+
+## Teach Stack:-
+* JavaScript
+* Html
+* Css
+* Node 
+* EJS
+
+# Hosted on:- 
+https://elitmus1.onrender.com/
+
+### Admin Credentials for Dasboard:-
+Email:- vibhupandey.vp@gmail.com  
+pass:- 123456
+
+
