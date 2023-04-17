@@ -105,6 +105,19 @@ async function signup(email,password){
 authRouter.get('/admin',function(req,res,next){
 res.render("components/admin/index" ,{tittle: "Elitmus Admin"})
 })
+authRouter.get('/admin-login',async function(req,res,next){
+	try{
+		await client.connect();
+	 	console.log("Connected correctly to Mongodb");
+		const Ruser = await client.db("elitmus").collection("auth").find({}).toArray();
+		const user = await client.db("elitmus").collection("stats").find({}).toArray();
+		console.log("Reg User",Ruser)
+		console.log("Active user",user)
+		res.render("components/pannel/index",{tittle:"Elitmus Admin",user:user,Ruser:Ruser})
+
+	}catch(err){}
+	
+})
 authRouter.post('/login', function (req, res,next) {
 	console.log(req.body)
 
