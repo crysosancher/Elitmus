@@ -86,8 +86,17 @@
       </div>
     </div>
   
- 
-  
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<main class="container" >
+  <canvas id="barChart"></canvas>
+  <canvas id="lineChart"></canvas>
+</main>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    
+    
+
    
   
   <section id="stats-subtitle">
@@ -109,10 +118,12 @@
               </div>
               <div class="media-body">
                 <h4>Highest Score</h4>
-                <span>Monthly </span>
               </div>
               <div class="align-self-center">
-                <h1><%= 460%></h1>
+                <h1>
+                <span class="max-user"></span>-
+                  <span class="max-score"></span>
+                  </h1>
               </div>
             </div>
           </div>
@@ -130,10 +141,12 @@
               </div>
               <div class="media-body">
                 <h4>Lowest Score</h4>
-                <span>Monthly </span>
               </div>
               <div class="align-self-center"> 
-                <h1>95</h1>
+                <h1 >
+                  <span class="min-user"></span>-
+                  <span class="min-score"></span>
+                </h1>
               </div>
             </div>
           </div>
@@ -142,7 +155,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-xl-6 col-md-12">
       <div class="card">
         <div class="card-content">
@@ -164,7 +177,7 @@
       </div>
     </div>
 
-    <div class="col-xl-6 col-md-12">
+    <!-- <div class="col-xl-6 col-md-12">
       <div class="card">
         <div class="card-content">
           <div class="card-body cleartfix">
@@ -183,7 +196,50 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
 </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+<script>
+  // var ruser =`<%- JSON.stringify(Ruser) %>` ;
+  var user =`<%- JSON.stringify(user) %>` ;
+  // var russArray = JSON.parse(ruser);
+  var scoreArray = JSON.parse(user);
+console.log(scoreArray)
+  var scores = scoreArray.map( ({score:{game1=[0],game2=[0],game3=[0]}}) => game1[0]  + game2[0]+game3[0]   );
+  var usernames = scoreArray.map( ({email}) => email.split('@')[0] );
+  var times = scoreArray
+  var max = scores.reduce ( (accu,curr) => curr>accu?curr:accu,0);
+  var min = scores.reduce ( (accu,curr) => curr<accu?curr:accu);
+  document.querySelector('.max-score').textContent=max;
+  document.querySelector('.max-user').textContent=usernames[scores.indexOf(max)].toUpperCase();
+  document.querySelector('.min-score').textContent=min;
+  document.querySelector('.min-user').textContent=usernames[scores.indexOf(min)].toUpperCase();
+  var ctx = document.getElementById("barChart").getContext('2d');
+var barChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: usernames,
+    datasets: [{
+      label: 'Scores',
+      data: scores,
+      backgroundColor: "rgba(255,0,0,1)"
+    }]
+  }
+});
+
+var cty = document.getElementById("lineChart").getContext('2d');
+var barChart = new Chart(cty, {
+  type: 'line',
+  data: {
+    labels: usernames,
+    datasets: [{
+      label: 'Time Spent',
+      data: scores,
+      backgroundColor: 'transparent',
+      borderColor:'blue'
+    }]
+  }
+});
+</script>
