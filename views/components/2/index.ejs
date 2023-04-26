@@ -16,7 +16,7 @@
 			<a href="/auth/logout">Logout</a>
 		</section>
 		<div class="question">
-			<p>How many emotes where their in Previous Game? </p>
+			<p>How many unique emotes where their in Previous Game? </p>
 			<input type="text" name="name" autocomplete="off" id="name">
 			<button class="btn">Submit</button>
 		</div>
@@ -26,6 +26,7 @@
 <script>
 	document.querySelector('.btn').addEventListener('click',async function(){
 		var name = document.querySelector('#name').value;
+		let c=0;
 		if(name == "8"){
 			await fetch('/insert/2',{
 				method:'POST',
@@ -39,8 +40,20 @@
 			window.location.href = "/3";
 		}
 		else{
-			alert("Wrong answer");
+			// alert("Wrong answer");
+			// window.location.href = "/";
+			if(c==0){
+				c++;
+				alert(" Wrong Answer, Try Again, You have 1 more chance")
+				alert("Hint:There were only 16 boxes in the game");
+
+			}else if(c==1){
+				c++;
+				alert("See you later..Better Luck next time");
+				c=0;
 			window.location.href = "/";
+			}
+
 		}
 	})
 </script>
