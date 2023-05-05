@@ -32,6 +32,7 @@ async function insert1(email, score, time) {
           email: email,
           score: { game1: [score] },
           time: { game1: [time] },
+          
         })
         .then(() => {
           console.log("inserted");
@@ -157,7 +158,7 @@ async function insert3(email,score){
 statsRouter.post("/3", function (req, res, next) {
   console.log("inside insert");
   if (req.session.loggedIn) {
-    console.log(req.body);
+    //console.log(req.body);
     insert3(req.session.email, req.body.score);
     res.send("inserted");
   } else {

@@ -16,14 +16,19 @@ const client = new MongoClient(uri, {
 });
 console.log("connected");
 gameRouter.get("/final", async function (req, res, next) {
-  if (req.session.loggedIn) {
+  if (req.session.loggedIn && req.session.game1 && req.session.game2 && req.session.game3) {
     try {
       await client.connect();
       console.log("Connected correctly to Mongodb");
+      //if()
       const user = await client
         .db("elitmus")
         .collection("stats")
         .findOne({ email: req.session.email });
+        //console.log(user)
+        // if(!(user.game1=='true' && user.game2=='true' && user.game3=='true')){
+        //   res.redirect('/')
+        // }
       //console.log("user====", user.score.game1);
       res.render("components/final/index", {
         tittle: "Elitmus Puzzle Game",
@@ -44,7 +49,8 @@ gameRouter.get("/final", async function (req, res, next) {
   }
 });
 gameRouter.get("/3", function (req, res, next) {
-  if (req.session.loggedIn) {
+  if (req.session.loggedIn && req.session.game1 && req.session.game2) {
+    req.session.game3 = true;
     res.render("components/3/index", {
       tittle: "Elitmus Puzzle Game 3",
       email: req.session.email,
@@ -54,17 +60,21 @@ gameRouter.get("/3", function (req, res, next) {
   }
 });
 gameRouter.get("/1", function (req, res, next) {
+  
   if (req.session.loggedIn) {
+    req.session.game1 = true;
     res.render("components/1/index", {
       tittle: "Elitmus Puzzle Game 1",
       email: req.session.email,
+
     });
   } else {
     res.redirect("/");
   }
 });
 gameRouter.get("/2", function (req, res, next) {
-  if (req.session.loggedIn) {
+  if (req.session.loggedIn && req.session.game1) {
+    req.session.game2 = true;
     res.render("components/2/index", {
       tittle: "Elitmus Puzzle Game 2",
       email: req.session.email,
